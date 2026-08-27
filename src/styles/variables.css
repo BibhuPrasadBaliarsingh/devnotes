@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Design Tokens
+   Centralized theme variables consumed by Tailwind utility classes below.
+   Do NOT hardcode colors in components — reference these tokens instead.
+   ========================================================================== */
+
+:root {
+  /* Light theme (default) */
+  --rgb-bg: 255 255 255;
+  --rgb-fg: 15 23 42;
+  --rgb-card: 255 255 255;
+  --rgb-border: 226 232 240;
+  --rgb-muted: 100 116 139;
+  --rgb-primary: 79 70 229;
+  --rgb-primary-fg: 255 255 255;
+  --rgb-secondary: 236 72 153;
+  --rgb-code-bg: 15 23 42;
+  --rgb-code-fg: 226 232 240;
+  --rgb-sidebar: 248 250 252;
+  --rgb-hover: 241 245 249;
+  --rgb-success: 22 163 74;
+  --rgb-warning: 217 119 6;
+  --rgb-danger: 220 38 38;
+}
+
+.dark {
+  --rgb-bg: 8 11 20;
+  --rgb-fg: 226 232 240;
+  --rgb-card: 17 22 35;
+  --rgb-border: 30 38 56;
+  --rgb-muted: 148 163 184;
+  --rgb-primary: 129 140 248;
+  --rgb-primary-fg: 15 15 25;
+  --rgb-secondary: 244 114 182;
+  --rgb-code-bg: 3 6 14;
+  --rgb-code-fg: 226 232 240;
+  --rgb-sidebar: 13 17 28;
+  --rgb-hover: 22 28 44;
+  --rgb-success: 74 222 128;
+  --rgb-warning: 250 204 21;
+  --rgb-danger: 248 113 113;
+}
