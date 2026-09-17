@@ -106,6 +106,16 @@ input[type="email"] {
   color: blue;
 }
 
+/* Adjacent Sibling (+) */
+h2 + p {
+  margin-top: 0;
+}
+
+/* General Sibling (~) */
+h2 ~ p {
+  color: #555;
+}
+
 /* Multiple selectors */
 h1,
 h2,
@@ -132,6 +142,8 @@ button:hover {
             ['#header', 'Element with id header'],
             ['div p', 'p elements inside div'],
             ['div > p', 'Direct child p elements'],
+            ['h2 + p', 'Adjacent sibling (p immediately following h2)'],
+            ['h2 ~ p', 'General sibling (all p elements following h2 under same parent)'],
             ['input[type="text"]', 'Text inputs'],
             ['button:hover', 'Button while hovered'],
             ['li:first-child', 'First child list item'],
