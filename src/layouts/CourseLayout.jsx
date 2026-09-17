@@ -3,6 +3,7 @@ import { Outlet, useParams } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Sidebar from '../components/layout/Sidebar';
+import ScrollToTop from '../components/common/ScrollToTop';
 import { getCourseById } from '../data';
 import NotFound from '../pages/NotFound/NotFound';
 
@@ -14,6 +15,7 @@ export default function CourseLayout() {
   if (!course) {
     return (
       <div className="flex min-h-screen flex-col bg-bg text-fg">
+        <ScrollToTop />
         <Header />
         <main className="flex-1">
           <NotFound message={`We couldn't find a course called "${courseId}".`} />
@@ -25,6 +27,7 @@ export default function CourseLayout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-bg text-fg">
+      <ScrollToTop />
       <Header showSidebarToggle onOpenMobileSidebar={() => setMobileSidebarOpen(true)} />
       <div className="mx-auto flex w-full max-w-[1440px] flex-1">
         <Sidebar

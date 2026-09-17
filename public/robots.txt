@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /notes/
+Disallow: /api/
+
+Sitemap: https://developersnotes.netlify.app/sitemap.xml

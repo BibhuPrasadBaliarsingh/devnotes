@@ -43,8 +43,7 @@ export default function Header({ onOpenMobileSidebar, showSidebarToggle = false 
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-hover text-fg' : 'text-muted hover:bg-hover hover:text-fg'
+                `rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isActive ? 'bg-hover text-fg' : 'text-muted hover:bg-hover hover:text-fg'
                 }`
               }
             >
@@ -93,8 +92,7 @@ export default function Header({ onOpenMobileSidebar, showSidebarToggle = false 
               to={link.to}
               onClick={() => setMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `block rounded-lg px-3 py-2.5 text-sm font-medium ${
-                  isActive ? 'bg-hover text-fg' : 'text-muted hover:bg-hover hover:text-fg'
+                `block rounded-lg px-3 py-2.5 text-sm font-medium ${isActive ? 'bg-hover text-fg' : 'text-muted hover:bg-hover hover:text-fg'
                 }`
               }
             >

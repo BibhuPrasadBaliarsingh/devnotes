@@ -5,6 +5,8 @@ import { cssCourse } from './courses/css';
 import { nodeCourse } from './courses/node';
 import { gitCourse } from './courses/git';
 
+export * from './notes';
+
 export const courses = [reactCourse, cssCourse, nodeCourse, gitCourse];
 
 export function getCourseById(courseId) {

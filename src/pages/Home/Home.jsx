@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Clock, Layers, Users } from 'lucide-react';
+import { ArrowRight, Sparkles, Clock, Layers, Users, BookOpen } from 'lucide-react';
 import SearchBar from '../../components/search/SearchBar';
 import CourseCard from '../../components/ui/CourseCard';
-import { courses, getTotalTopicCount } from '../../data';
+import NoteCard from '../../components/ui/NoteCard';
+import SEOHead from '../../components/common/SEOHead';
+import { courses, notes, getTotalTopicCount } from '../../data';
 import { useProgress } from '../../contexts/ProgressContext';
 
 const FEATURES = [
   {
     icon: Layers,
     title: 'Structured, not scattered',
-    text: 'Every course is organized into chapters and topics you can move through in order, or jump around freely.',
+    text: 'Every note and course is organized into logical sections you can move through in order, or jump around freely.',
   },
   {
     icon: Sparkles,
     title: 'Built for reading',
-    text: 'Clean typography, code blocks with copy buttons, comparison tables, and callouts — no clutter.',
+    text: 'Clean typography, code blocks with copy buttons, comparison tables, callouts, and Q&A accordions — no clutter.',
   },
   {
     icon: Clock,
@@ -26,24 +28,30 @@ const FEATURES = [
 export default function Home() {
   const { recentlyViewed, totalCompletedCount } = useProgress();
   const totalTopics = courses.reduce((sum, c) => sum + getTotalTopicCount(c), 0);
+  const featuredNotes = notes.filter((n) => n.featured).slice(0, 6);
 
   return (
     <div>
+      <SEOHead
+        title="Home"
+        description="Free web developer notes and interactive courses for JavaScript, React, Node.js, Express, Python, SQL, SDLC, Testing, and HR Interviews."
+      />
+
       {/* Hero */}
       <section className="border-b border-border bg-gradient-to-b from-primary/5 to-transparent">
         <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              {totalTopics}+ topics and growing
+              {notes.length} Developer Guides & {totalTopics}+ interactive topics
             </span>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-fg sm:text-5xl">
               Learn. Practice. <span className="text-primary">Master.</span>
             </h1>
-            <p className="mt-4 text-lg text-muted">Developer notes made simple.</p>
+            <p className="mt-4 text-lg text-muted">Developer documentation made simple.</p>
             <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
-              Learn React, CSS, Node.js, Git and more through structured, easy-to-understand notes —
-              built for reading, not scrolling past ads.
+              Master JavaScript, React, Node.js, Python, SQL, SDLC and Testing through clean, structured web documentation —
+              built for reading and learning, not scrolling past ads.
             </p>
 
             <div className="mx-auto mt-8 max-w-lg">
@@ -52,29 +60,50 @@ export default function Home() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <Link
-                to="/learn"
+                to="/notes"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-fg transition-opacity hover:opacity-90"
               >
-                Start Learning
-                <ArrowRight className="h-4 w-4" />
+                <BookOpen className="h-4 w-4" />
+                Browse Notes
               </Link>
               <Link
                 to="/learn"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-hover"
               >
-                Browse Topics
+                Browse Interactive Courses
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular courses */}
+      {/* Featured Web Notes */}
       <section className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6">
         <div className="mb-6 flex items-end justify-between">
           <div>
-            <h2 className="text-xl font-bold text-fg sm:text-2xl">Popular courses</h2>
-            <p className="mt-1 text-sm text-muted">Pick a technology and start reading.</p>
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary">Web Documentation</span>
+            <h2 className="mt-1 text-xl font-bold text-fg sm:text-2xl">Featured Developer Notes</h2>
+            <p className="mt-1 text-sm text-muted">Structured documentation guides with code examples and Q&As.</p>
+          </div>
+          <Link to="/notes" className="shrink-0 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary/80">
+            View All Notes ({notes.length}) <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredNotes.map((note) => (
+            <NoteCard key={note.id} note={note} />
+          ))}
+        </div>
+      </section>
+
+      {/* Popular courses */}
+      <section className="border-t border-border/60 mx-auto max-w-[1440px] px-4 py-14 sm:px-6">
+        <div className="mb-6 flex items-end justify-between">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary">Interactive Courses</span>
+            <h2 className="mt-1 text-xl font-bold text-fg sm:text-2xl">Popular Courses</h2>
+            <p className="mt-1 text-sm text-muted">Pick a technology and start reading interactively.</p>
           </div>
           <Link to="/learn" className="hidden shrink-0 items-center gap-1 text-sm font-medium text-primary sm:flex">
             View all <ArrowRight className="h-3.5 w-3.5" />

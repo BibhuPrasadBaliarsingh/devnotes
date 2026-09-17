@@ -42,34 +42,39 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const categoryLabel = CATEGORIES.find((c) => c.id === formData.category)?.label || formData.category;
+
     try {
-      // Send via Web3Forms API to send direct email to bibhupbaliarsingh@gmail.com
-      const res = await fetch('https://api.web3forms.com/submit', {
+      // Send form submission via FormSubmit.co
+      const response = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          access_key: '6015b630-f446-4cb7-a50d-400a4ce2585f', // Web3Forms direct key for form delivery
-          to_email: TARGET_EMAIL,
-          from_name: formData.name || 'DevNotes Visitor',
+          name: formData.name,
           email: formData.email,
-          subject: formData.subject || `DevNotes Feedback: ${formData.category}`,
-          message: `Category: ${formData.category}\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+          category: categoryLabel,
+          _subject: formData.subject || `DevNotes Contact: ${categoryLabel}`,
+          message: formData.message,
+          _captcha: 'false',
+          _template: 'table',
         }),
       });
 
-      const data = await res.json();
-      if (!data.success) {
-        // If web3forms API requires fallback, trigger direct mailto link dispatch
+      const data = await response.json();
+      if (data.success === 'true' || data.success === true || response.ok) {
+        setSubmitted(true);
+      } else {
         triggerMailto();
+        setSubmitted(true);
       }
     } catch {
       triggerMailto();
+      setSubmitted(true);
     } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
     }
   };
 
@@ -151,7 +156,12 @@ export default function Contact() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            action={`https://formsubmit.co/${TARGET_EMAIL}`}
+            method="POST"
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             {/* Category selection */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-muted mb-2">

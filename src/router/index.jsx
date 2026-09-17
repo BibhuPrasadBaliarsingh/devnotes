@@ -3,6 +3,8 @@ import MainLayout from '../layouts/MainLayout';
 import CourseLayout from '../layouts/CourseLayout';
 import Home from '../pages/Home/Home';
 import Learn from '../pages/Learn/Learn';
+import NotesList from '../pages/Notes/NotesList';
+import NoteDetail from '../pages/Notes/NoteDetail';
 import Course from '../pages/Course/Course';
 import Topic from '../pages/Topic/Topic';
 import Search from '../pages/Search/Search';
@@ -20,6 +22,9 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'learn', element: <Learn /> },
+      { path: 'notes', element: <NotesList /> },
+      { path: 'notes/:slug', element: <NoteDetail /> },
+      { path: 'pdf-notes', element: <NotesList /> },
       { path: 'search', element: <Search /> },
       { path: 'bookmarks', element: <Bookmarks /> },
       { path: 'progress', element: <Progress /> },

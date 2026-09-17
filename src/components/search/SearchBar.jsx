@@ -35,7 +35,12 @@ export default function SearchBar({ variant = 'header', autoFocus = false, onNav
   }, []);
 
   function goToResult(result) {
-    navigate(`/learn/${result.courseId}/${result.topicId}`);
+    if (result.type === 'note') {
+      const hash = result.sectionId ? `#${result.sectionId}` : '';
+      navigate(`/notes/${result.slug}${hash}`);
+    } else {
+      navigate(`/learn/${result.courseId}/${result.topicId}`);
+    }
     setQuery('');
     setIsOpen(false);
     onNavigate?.();
@@ -58,9 +63,8 @@ export default function SearchBar({ variant = 'header', autoFocus = false, onNav
           Search notes
         </label>
         <div
-          className={`flex items-center gap-2 rounded-lg border border-border bg-card px-3 transition-colors focus-within:border-primary ${
-            isHeader ? 'h-9' : 'h-12'
-          }`}
+          className={`flex items-center gap-2 rounded-lg border border-border bg-card px-3 transition-colors focus-within:border-primary ${isHeader ? 'h-9' : 'h-12'
+            }`}
         >
           <Search className={`shrink-0 text-muted ${isHeader ? 'h-4 w-4' : 'h-5 w-5'}`} />
           <input
@@ -74,9 +78,8 @@ export default function SearchBar({ variant = 'header', autoFocus = false, onNav
             }}
             onFocus={() => setIsOpen(true)}
             placeholder="Search notes… (e.g. virtual dom, git rebase)"
-            className={`w-full bg-transparent outline-none placeholder:text-muted text-fg ${
-              isHeader ? 'text-sm' : 'text-base'
-            }`}
+            className={`w-full bg-transparent outline-none placeholder:text-muted text-fg ${isHeader ? 'text-sm' : 'text-base'
+              }`}
             role="combobox"
             aria-expanded={isOpen && results.length > 0}
             aria-controls={listboxId}

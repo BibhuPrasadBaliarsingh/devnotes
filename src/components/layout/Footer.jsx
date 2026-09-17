@@ -14,6 +14,7 @@ export default function Footer() {
         </div>
         <nav className="flex items-center gap-4 text-sm text-muted">
           <Link to="/learn" className="hover:text-fg">Learn</Link>
+          <Link to="/notes" className="hover:text-fg">Developer Notes</Link>
           <Link to="/about" className="hover:text-fg">About</Link>
           <Link to="/contact" className="hover:text-fg">Contact</Link>
           <a
