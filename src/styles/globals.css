@@ -67,3 +67,20 @@ input:focus-visible,
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Hide Netlify drawer / floating toolbar badge */
+#netlify-drawer,
+#netlify-toolbar,
+netlify-drawer,
+netlify-toolbar,
+iframe[src*="netlify"],
+iframe[id*="netlify"],
+[data-netlify-badge],
+div[class*="netlify-drawer"],
+div[class*="netlify-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
