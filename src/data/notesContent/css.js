@@ -67,89 +67,213 @@ p {
       id: 'css-selectors',
       title: '2. CSS Selectors',
       summary:
-        'Target HTML elements using element, class, ID, attribute, combinator, and pseudo selectors.',
+        'Target HTML elements using element, class, ID, attribute, combinator, pseudo-classes, and pseudo-elements.',
       content: [
         {
           type: 'paragraph',
-          text: 'Selectors determine which HTML elements a CSS rule targets. Understanding selectors is essential for writing precise and maintainable styles.',
+          text: 'Selectors determine which HTML elements a CSS rule targets. Understanding basic selectors, combinators, pseudo-classes, and pseudo-elements is essential for writing precise, modern, and maintainable styles.',
+        },
+        {
+          type: 'subheading',
+          text: 'Basic Selectors & Combinators',
         },
         {
           type: 'code',
           language: 'css',
-          code: `/* Element */
-p {
-  color: #333;
+          code: `/* Basic Selectors */
+p { color: #333; }                  /* Element / Type */
+.card { padding: 20px; }            /* Class */
+#main-header { height: 70px; }       /* ID */
+input[type="email"] { border: 1px solid #ccc; } /* Attribute */
+
+/* Combinators */
+.card p { margin-bottom: 10px; }    /* Descendant */
+.card > p { color: blue; }          /* Direct Child */
+h2 + p { margin-top: 0; }           /* Adjacent Sibling */
+h2 ~ p { color: #555; }             /* General Sibling */
+h1, h2, h3 { line-height: 1.2; }   /* Selector Grouping */`,
+        },
+        {
+          type: 'table',
+          headers: ['Selector', 'Type / Combinator', 'Meaning'],
+          rows: [
+            ['p', 'Element / Type', 'Matches all <p> elements'],
+            ['.card', 'Class', 'Matches elements with class="card"'],
+            ['#header', 'ID', 'Matches element with id="header"'],
+            ['[type="text"]', 'Attribute', 'Matches elements with attribute type="text"'],
+            ['div p', 'Descendant', 'Matches <p> anywhere inside a <div>'],
+            ['div > p', 'Child', 'Matches <p> that is a direct child of <div>'],
+            ['h2 + p', 'Adjacent Sibling', 'Matches <p> immediately following <h2>'],
+            ['h2 ~ p', 'General Sibling', 'Matches all <p> siblings after <h2>'],
+            ['*', 'Universal', 'Matches all elements'],
+          ],
+        },
+        {
+          type: 'subheading',
+          text: 'CSS Pseudo-Classes (:)',
+        },
+        {
+          type: 'paragraph',
+          text: 'A pseudo-class is specified with a single colon (:) and targets elements based on a dynamic state, user interaction, DOM position, or condition.',
+        },
+        {
+          type: 'code',
+          language: 'css',
+          code: `/* 1. User Action & Interaction States */
+button:hover { opacity: 0.8; }
+a:visited { color: #6b21a8; }
+button:active { transform: scale(0.98); }
+input:focus { outline: 2px solid #3b82f6; }
+button:focus-visible { outline: 2px solid #2563eb; } /* Keyboard focus only */
+.card:focus-within { border-color: #2563eb; }     /* Focus on card or descendant */
+
+/* 2. Structural & Position Pseudo-Classes */
+li:first-child { font-weight: bold; }
+li:last-child { border-bottom: none; }
+tr:nth-child(even) { background-color: #f9fafb; }
+tr:nth-child(3n+1) { background-color: #eff6ff; }
+p:nth-of-type(2) { color: #1e40af; }
+div:only-child { padding: 0; }
+div:empty { display: none; }                        /* Matches elements with no children/text */
+
+/* 3. Form & Input State Pseudo-Classes */
+input:disabled { background-color: #e5e7eb; cursor: not-allowed; }
+input:checked + label { color: #2563eb; font-weight: 600; }
+input:required { border-left: 3px solid #ef4444; }
+input:valid { border-color: #10b981; }
+input:invalid { border-color: #ef4444; }
+input:placeholder-shown { border-style: dashed; }
+
+/* 4. Modern & Functional Pseudo-Classes */
+/* :is() - groups selectors, takes highest specificity inside */
+:is(header, footer, main) p { line-height: 1.6; }
+
+/* :where() - groups selectors with 0 specificity */
+:where(h1, h2, h3) a { text-decoration: none; }
+
+/* :has() - parent / relational selector */
+.card:has(img) { grid-template-columns: 1fr 2fr; }
+form:has(input:invalid) button[type="submit"] { opacity: 0.5; }
+
+/* :not() - negation pseudo-class */
+button:not(:disabled):hover { background-color: #1d4ed8; }
+
+/* :target - element matching current URL hash identifier */
+section:target { highlight: yellow; animation: flash 1s; }`,
+        },
+        {
+          type: 'table',
+          headers: ['Pseudo-Class', 'Category', 'Description'],
+          rows: [
+            [':hover', 'User Action', 'Applies when mouse hovers over element'],
+            [':focus', 'User Action', 'Applies when element receives focus'],
+            [':focus-visible', 'User Action', 'Applies focus indicator for keyboard navigation'],
+            [':focus-within', 'User Action', 'Applies when element or any descendant has focus'],
+            [':active', 'User Action', 'Applies while element is being activated/clicked'],
+            [':first-child', 'Structural', 'Targets element if it is the first child of its parent'],
+            [':last-child', 'Structural', 'Targets element if it is the last child of its parent'],
+            [':nth-child(n)', 'Structural', 'Targets element based on formula or index among siblings'],
+            [':nth-of-type(n)', 'Structural', 'Targets element based on index among siblings of same type'],
+            [':empty', 'Structural', 'Targets element with zero children (nodes/text)'],
+            [':disabled', 'Form State', 'Targets disabled form elements'],
+            [':checked', 'Form State', 'Targets checked checkboxes or radio buttons'],
+            [':required / :optional', 'Form State', 'Targets form inputs with required or optional attribute'],
+            [':valid / :invalid', 'Form State', 'Targets inputs matching validation constraints'],
+            [':is(...)', 'Functional', 'Matches any selector in list; uses highest specificity'],
+            [':where(...)', 'Functional', 'Matches any selector in list; always 0 specificity'],
+            [':has(...)', 'Relational', 'Parent selector: matches parent containing matching children'],
+            [':not(...)', 'Negation', 'Matches elements that do not match given selector'],
+            [':target', 'URL State', 'Targets element whose ID matches URL fragment identifier'],
+          ],
+        },
+        {
+          type: 'subheading',
+          text: 'CSS Pseudo-Elements (::)',
+        },
+        {
+          type: 'paragraph',
+          text: 'A pseudo-element is specified with a double colon (::) and styles a specific sub-part of an element or inserts generated content into the document tree.',
+        },
+        {
+          type: 'code',
+          language: 'css',
+          code: `/* 1. Generated Content */
+.button::before {
+  content: "★ ";
+  color: gold;
 }
 
-/* Class */
-.card {
-  padding: 20px;
-}
-
-/* ID */
-#main-header {
-  height: 70px;
-}
-
-/* Attribute */
-input[type="email"] {
-  border: 1px solid #ccc;
-}
-
-/* Descendant */
-.card p {
-  margin-bottom: 10px;
-}
-
-/* Child */
-.card > p {
-  color: blue;
-}
-
-/* Adjacent Sibling (+) */
-h2 + p {
-  margin-top: 0;
-}
-
-/* General Sibling (~) */
-h2 ~ p {
-  color: #555;
-}
-
-/* Multiple selectors */
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-}
-
-/* Pseudo-class */
-button:hover {
-  opacity: 0.8;
-}
-
-/* Pseudo-element */
-.card::before {
+.card::after {
   content: "";
+  display: block;
+  clear: both;
+}
+
+/* 2. Text & Typography Formatting */
+p::first-letter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  margin-right: 8px;
+}
+
+p::first-line {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* 3. Text Selection & UI Features */
+::selection {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+input::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+li::marker {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+input::file-selector-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
 }`,
         },
         {
           type: 'table',
-          headers: ['Selector', 'Meaning'],
+          headers: ['Pseudo-Element', 'Description', 'Common Use Case'],
           rows: [
-            ['p', 'All p elements'],
-            ['.card', 'Elements with class card'],
-            ['#header', 'Element with id header'],
-            ['div p', 'p elements inside div'],
-            ['div > p', 'Direct child p elements'],
-            ['h2 + p', 'Adjacent sibling (p immediately following h2)'],
-            ['h2 ~ p', 'General sibling (all p elements following h2 under same parent)'],
-            ['input[type="text"]', 'Text inputs'],
-            ['button:hover', 'Button while hovered'],
-            ['li:first-child', 'First child list item'],
-            ['::before', 'Generated content before an element'],
-            ['*', 'All elements'],
+            ['::before', 'Inserts virtual content before element content', 'Icons, decorative shapes, badges'],
+            ['::after', 'Inserts virtual content after element content', 'Clearfix, tooltip arrows, underline effects'],
+            ['::first-letter', 'Styles the first letter of a block element', 'Drop caps in typography'],
+            ['::first-line', 'Styles the first formatted line of block element', 'Leading paragraph highlights'],
+            ['::selection', 'Styles text highlighted/selected by user', 'Branded selection colors'],
+            ['::placeholder', 'Styles hint text in <input> and <textarea>', 'Custom input placeholder styling'],
+            ['::marker', 'Styles list item bullet points or numbers', 'Custom list marker colors/fonts'],
+            ['::backdrop', 'Styles background overlay behind <dialog> or fullscreen', 'Modal overlay dark blur effect'],
+            ['::file-selector-button', 'Styles button inside <input type="file">', 'Custom file upload button styling'],
           ],
+        },
+        {
+          type: 'callout',
+          text: 'Pseudo-Class (:) vs Pseudo-Element (::): A pseudo-class (e.g. :hover, :first-child) selects an entire element based on state or DOM position. A pseudo-element (e.g. ::before, ::first-line) selects a specific sub-part of an element or injects decorative content. Standard CSS3 uses single colon for pseudo-classes and double colon for pseudo-elements.',
+        },
+        {
+          type: 'subheading',
+          text: 'Selector Specificity Rules',
         },
       ],
     },
