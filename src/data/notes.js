@@ -64,6 +64,19 @@ export const notes = [
     contentModule: () => import('./notesContent/react'),
   },
   {
+    id: 'nextjs',
+    slug: 'nextjs',
+    title: 'Next.js',
+    category: 'Web Development',
+    description:
+      'Comprehensive Next.js guide covering App Router, Server and Client Components, routing, layouts, dynamic routes, data fetching, caching, Server Actions, API route handlers, metadata, image optimization, authentication, middleware, performance, deployment, and production best practices.',
+    tags: ['Next.js', 'React', 'App Router', 'Server Components', 'Server Actions', 'Full-Stack', 'Frontend'],
+    icon: 'Globe',
+    featured: true,
+    createdAt: '2026-01-09',
+    contentModule: () => import('./notesContent/nextjs'),
+  },
+  {
     id: 'nodejs',
     slug: 'nodejs',
     title: 'Node.js',

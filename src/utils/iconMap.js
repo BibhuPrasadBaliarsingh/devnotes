@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Briefcase,
   FileCode,
+  Globe,
 } from 'lucide-react';
 
 const ICONS = {
@@ -28,6 +29,7 @@ const ICONS = {
   ShieldCheck,
   Briefcase,
   FileCode,
+  Globe,
 };
 
 export function getCourseIcon(name) {

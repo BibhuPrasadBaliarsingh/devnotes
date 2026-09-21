@@ -2,6 +2,7 @@ import htmlContent from './html';
 import cssContent from './css';
 import javascriptContent from './javascript';
 import reactContent from './react';
+import nextjsContent from './nextjs';
 import nodejsContent from './nodejs';
 import expressContent from './express';
 import pythonContent from './python';
@@ -16,6 +17,7 @@ const contentMap = {
   css: cssContent,
   javascript: javascriptContent,
   react: reactContent,
+  nextjs: nextjsContent,
   nodejs: nodejsContent,
   express: expressContent,
   python: pythonContent,
