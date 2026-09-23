@@ -3067,6 +3067,1695 @@ console.log(activeUsers);`
           text: 'For practical web development, learn JavaScript fundamentals first, then master functions and scope, arrays and objects, DOM and events, asynchronous JavaScript, Promises and async/await, modules, APIs, and finally move into React or another frontend framework.'
         }
       ]
+    },
+
+    {
+      id: 'type-coercion',
+      title: '39. Type Coercion, Truthy & Falsy Values',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Type coercion is the conversion of a value from one data type to another. JavaScript performs both implicit and explicit type conversion.'
+        },
+        {
+          type: 'heading',
+          text: 'Implicit Type Coercion'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `console.log("5" + 5); // "55"
+console.log("5" - 2); // 3
+console.log("10" * 2); // 20
+console.log(true + 1); // 2`
+        },
+        {
+          type: 'heading',
+          text: 'Explicit Type Conversion'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const value = "100";
+
+console.log(Number(value));
+console.log(String(100));
+console.log(Boolean(1));`
+        },
+        {
+          type: 'heading',
+          text: 'Truthy Values'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Non-empty strings',
+            'Non-zero numbers',
+            'Objects',
+            'Arrays',
+            'Functions',
+            'true'
+          ]
+        },
+        {
+          type: 'heading',
+          text: 'Falsy Values'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'false',
+            '0',
+            '-0',
+            '0n',
+            '""',
+            'null',
+            'undefined',
+            'NaN'
+          ]
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `if ("Hello") {
+  console.log("Truthy");
+}
+
+if (0) {
+  console.log("This will not execute");
+}`
+        }
+      ]
+    },
+
+    {
+      id: 'execution-context',
+      title: '40. Execution Context & Call Stack',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'An execution context is the environment created by JavaScript when code is evaluated. It contains information required to execute the code, including lexical environments and the current this binding.'
+        },
+        {
+          type: 'heading',
+          text: 'Types of Execution Context'
+        },
+        {
+          type: 'list',
+          ordered: true,
+          items: [
+            'Global Execution Context',
+            'Function Execution Context',
+            'Eval Execution Context'
+          ]
+        },
+        {
+          type: 'heading',
+          text: 'Call Stack'
+        },
+        {
+          type: 'paragraph',
+          text: 'The call stack keeps track of currently executing JavaScript functions. Function calls are pushed onto the stack and removed when execution finishes.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function first() {
+  second();
+}
+
+function second() {
+  third();
+}
+
+function third() {
+  console.log("Hello");
+}
+
+first();`
+        },
+        {
+          type: 'callout',
+          variant: 'info',
+          title: 'Interview Point',
+          text: 'JavaScript execution uses a call stack. Long-running synchronous work can block other JavaScript work from executing.'
+        }
+      ]
+    },
+
+    {
+      id: 'event-loop',
+      title: '41. Event Loop & JavaScript Runtime',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'The JavaScript runtime coordinates synchronous execution with asynchronous browser or host APIs and task queues. The event loop checks when the call stack is available and schedules queued work for execution.'
+        },
+        {
+          type: 'heading',
+          text: 'Basic Runtime Components'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Call Stack',
+            'Heap',
+            'Web APIs or Host APIs',
+            'Task Queue',
+            'Microtask Queue',
+            'Event Loop'
+          ]
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `console.log("1");
+
+setTimeout(() => {
+  console.log("2");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("3");
+});
+
+console.log("4");
+
+// Output:
+// 1
+// 4
+// 3
+// 2`
+        },
+        {
+          type: 'heading',
+          text: 'Microtasks vs Tasks'
+        },
+        {
+          type: 'table',
+          headers: ['Microtasks', 'Tasks'],
+          rows: [
+            ['Promise callbacks', 'setTimeout callbacks'],
+            ['queueMicrotask()', 'setInterval callbacks'],
+            ['MutationObserver callbacks', 'Many browser event callbacks']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'reference-values',
+      title: '42. Primitive vs Reference Values',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Primitive values are immutable values. Objects are reference values. Understanding this distinction is important when assigning variables and passing objects to functions.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `let a = 10;
+let b = a;
+
+b = 20;
+
+console.log(a); // 10
+console.log(b); // 20
+
+const user1 = {
+  name: "Bibhu"
+};
+
+const user2 = user1;
+
+user2.name = "Rahul";
+
+console.log(user1.name); // Rahul`
+        },
+        {
+          type: 'heading',
+          text: 'Important'
+        },
+        {
+          type: 'paragraph',
+          text: 'JavaScript passes arguments by value. When an object is passed, the value being copied is the reference to that object.'
+        }
+      ]
+    },
+
+    {
+      id: 'shallow-deep-copy',
+      title: '43. Shallow Copy vs Deep Copy',
+      content: [
+        {
+          type: 'heading',
+          text: 'Shallow Copy'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  name: "Bibhu",
+  address: {
+    city: "Bhubaneswar"
+  }
+};
+
+const copy = {
+  ...user
+};
+
+copy.address.city = "Cuttack";
+
+console.log(user.address.city);`
+        },
+        {
+          type: 'heading',
+          text: 'Deep Copy with structuredClone()'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  name: "Bibhu",
+  address: {
+    city: "Bhubaneswar"
+  }
+};
+
+const copy = structuredClone(user);
+
+copy.address.city = "Cuttack";
+
+console.log(user.address.city);
+console.log(copy.address.city);`
+        },
+        {
+          type: 'table',
+          headers: ['Shallow Copy', 'Deep Copy'],
+          rows: [
+            ['Copies top-level properties', 'Copies nested structures'],
+            ['Nested objects can remain shared', 'Nested objects are independently copied'],
+            ['Spread/Object.assign commonly used', 'structuredClone() can be used for supported data']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'recursion',
+      title: '44. Recursion',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Recursion occurs when a function calls itself. A recursive function normally requires a base condition to stop recursion.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function factorial(n) {
+  if (n <= 1) {
+    return 1;
+  }
+
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5));`
+        },
+        {
+          type: 'heading',
+          text: 'Recursive Array Example'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function countdown(n) {
+  if (n === 0) {
+    return;
+  }
+
+  console.log(n);
+
+  countdown(n - 1);
+}
+
+countdown(5);`
+        },
+        {
+          type: 'callout',
+          variant: 'warning',
+          title: 'Stack Overflow',
+          text: 'Deep or uncontrolled recursion can exceed the call stack and cause a RangeError.'
+        }
+      ]
+    },
+
+    {
+      id: 'advanced-functions',
+      title: '45. Advanced Function Concepts',
+      content: [
+        {
+          type: 'heading',
+          text: 'Default Parameters'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function greet(name = "Guest") {
+  console.log("Hello", name);
+}
+
+greet();
+greet("Bibhu");`
+        },
+        {
+          type: 'heading',
+          text: 'First-Class Functions'
+        },
+        {
+          type: 'paragraph',
+          text: 'Functions are first-class values in JavaScript. They can be assigned to variables, passed as arguments, returned from functions, and stored in objects or arrays.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const greet = function () {
+  return "Hello";
+};
+
+function execute(fn) {
+  console.log(fn());
+}
+
+execute(greet);`
+        },
+        {
+          type: 'heading',
+          text: 'Function Composition'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const double = x => x * 2;
+const square = x => x * x;
+
+const result = square(double(5));
+
+console.log(result);`
+        },
+        {
+          type: 'heading',
+          text: 'Currying'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const add = a => b => c => a + b + c;
+
+console.log(add(10)(20)(30));`
+        },
+        {
+          type: 'heading',
+          text: 'Memoization'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function memoize(fn) {
+  const cache = new Map();
+
+  return function (value) {
+    if (cache.has(value)) {
+      return cache.get(value);
+    }
+
+    const result = fn(value);
+
+    cache.set(value, result);
+
+    return result;
+  };
+}
+
+const square = memoize(x => x * x);
+
+console.log(square(10));
+console.log(square(10));`
+        }
+      ]
+    },
+
+    {
+      id: 'prototype-chain',
+      title: '46. Prototype Chain, new & instanceof',
+      content: [
+        {
+          type: 'heading',
+          text: 'Prototype Chain'
+        },
+        {
+          type: 'paragraph',
+          text: 'When a property is not found directly on an object, JavaScript can continue searching through its prototype chain.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  name: "Bibhu"
+};
+
+console.log(
+  Object.getPrototypeOf(user)
+);
+
+console.log(
+  user.toString()
+);`
+        },
+        {
+          type: 'heading',
+          text: 'Object.create()'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const person = {
+  greet() {
+    console.log("Hello");
+  }
+};
+
+const user = Object.create(person);
+
+user.greet();`
+        },
+        {
+          type: 'heading',
+          text: 'instanceof'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `class User {}
+
+const user = new User();
+
+console.log(user instanceof User);
+console.log(user instanceof Object);`
+        },
+        {
+          type: 'heading',
+          text: 'new Keyword'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function User(name) {
+  this.name = name;
+}
+
+const user = new User("Bibhu");
+
+console.log(user.name);`
+        }
+      ]
+    },
+
+    {
+      id: 'modern-object-features',
+      title: '47. Modern Object & Class Features',
+      content: [
+        {
+          type: 'heading',
+          text: 'Getters'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  firstName: "Bibhu",
+  lastName: "Baliarsingh",
+
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+console.log(user.fullName);`
+        },
+        {
+          type: 'heading',
+          text: 'Setters'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  name: "",
+
+  set username(value) {
+    this.name = value.trim();
+  }
+};
+
+user.username = " Bibhu ";
+
+console.log(user.name);`
+        },
+        {
+          type: 'heading',
+          text: 'Static Methods'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `class MathUtil {
+  static add(a, b) {
+    return a + b;
+  }
+}
+
+console.log(MathUtil.add(10, 20));`
+        },
+        {
+          type: 'heading',
+          text: 'Private Fields'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `class BankAccount {
+  #balance = 0;
+
+  deposit(amount) {
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount();
+
+account.deposit(1000);
+
+console.log(account.getBalance());`
+        }
+      ]
+    },
+
+    {
+      id: 'symbols-bigint',
+      title: '48. Symbol & BigInt',
+      content: [
+        {
+          type: 'heading',
+          text: 'Symbol'
+        },
+        {
+          type: 'paragraph',
+          text: 'Symbol creates unique primitive values that are commonly used as unique object property keys.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const id = Symbol("id");
+
+const user = {
+  name: "Bibhu",
+  [id]: 101
+};
+
+console.log(user[id]);`
+        },
+        {
+          type: 'heading',
+          text: 'BigInt'
+        },
+        {
+          type: 'paragraph',
+          text: 'BigInt represents integers larger than the safe integer range of Number.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const bigNumber =
+  123456789012345678901234567890n;
+
+console.log(bigNumber);
+
+console.log(
+  bigNumber + 10n
+);`
+        },
+        {
+          type: 'callout',
+          variant: 'warning',
+          title: 'BigInt Rule',
+          text: 'Do not mix BigInt and Number directly in arithmetic expressions. Convert them intentionally when needed.'
+        }
+      ]
+    },
+
+    {
+      id: 'regex',
+      title: '49. Regular Expressions',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Regular expressions are patterns used to search, match, validate, and replace text.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const pattern = /^[A-Za-z]+$/;
+
+console.log(pattern.test("Bibhu"));
+console.log(pattern.test("Bibhu123"));`
+        },
+        {
+          type: 'heading',
+          text: 'Common RegExp Methods'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const text = "JavaScript is powerful";
+
+console.log(
+  text.match(/JavaScript/)
+);
+
+console.log(
+  text.replace(/powerful/, "awesome")
+);
+
+console.log(
+  /JavaScript/.test(text)
+);`
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'test()',
+            'exec()',
+            'match()',
+            'matchAll()',
+            'replace()',
+            'replaceAll()',
+            'search()',
+            'split()'
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'date-intl',
+      title: '50. Date, Time & Intl API',
+      content: [
+        {
+          type: 'heading',
+          text: 'Date'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const now = new Date();
+
+console.log(now);
+console.log(now.getFullYear());
+console.log(now.getMonth());
+console.log(now.getDate());`
+        },
+        {
+          type: 'heading',
+          text: 'ISO Date'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const date = new Date();
+
+console.log(date.toISOString());`
+        },
+        {
+          type: 'heading',
+          text: 'Intl.NumberFormat'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const formatter = new Intl.NumberFormat(
+  "en-IN",
+  {
+    style: "currency",
+    currency: "INR"
+  }
+);
+
+console.log(formatter.format(80000));`
+        },
+        {
+          type: 'heading',
+          text: 'Intl.DateTimeFormat'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const formatter =
+  new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "full"
+  });
+
+console.log(formatter.format(new Date()));`
+        }
+      ]
+    },
+
+    {
+      id: 'collections',
+      title: '51. Map, Set, WeakMap & WeakSet',
+      content: [
+        {
+          type: 'heading',
+          text: 'WeakMap'
+        },
+        {
+          type: 'paragraph',
+          text: 'WeakMap stores key-value pairs where keys must be objects or non-registered symbols. Its weak references allow keys to become garbage-collectable when otherwise unreachable.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const weakMap = new WeakMap();
+
+const user = {};
+
+weakMap.set(user, {
+  loggedIn: true
+});
+
+console.log(
+  weakMap.get(user)
+);`
+        },
+        {
+          type: 'heading',
+          text: 'WeakSet'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const weakSet = new WeakSet();
+
+const user = {};
+
+weakSet.add(user);
+
+console.log(
+  weakSet.has(user)
+);`
+        },
+        {
+          type: 'table',
+          headers: ['Collection', 'Main Purpose'],
+          rows: [
+            ['Map', 'Key-value storage'],
+            ['Set', 'Unique values'],
+            ['WeakMap', 'Weakly held object/symbol keys'],
+            ['WeakSet', 'Weakly held object/symbol values']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'iterators-generators',
+      title: '52. Iterators & Generators',
+      content: [
+        {
+          type: 'heading',
+          text: 'Iterator'
+        },
+        {
+          type: 'paragraph',
+          text: 'An iterator is an object that follows the iterator protocol and provides a next() method that returns objects containing value and done properties.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const numbers = [10, 20, 30];
+
+const iterator = numbers[Symbol.iterator]();
+
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());`
+        },
+        {
+          type: 'heading',
+          text: 'Generator'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function* numbers() {
+  yield 10;
+  yield 20;
+  yield 30;
+}
+
+const generator = numbers();
+
+console.log(generator.next());
+console.log(generator.next());
+console.log(generator.next());`
+        },
+        {
+          type: 'callout',
+          variant: 'info',
+          title: 'Generator',
+          text: 'Generator functions use function* syntax and yield values one at a time. Calling a generator function returns an iterator.'
+        }
+      ]
+    },
+
+    {
+      id: 'promise-combinators',
+      title: '53. Promise Combinators',
+      content: [
+        {
+          type: 'heading',
+          text: 'Promise.all()'
+        },
+        {
+          type: 'paragraph',
+          text: 'Waits for all Promises to fulfill. If one rejects, the returned Promise rejects.'
+        },
+        {
+          type: 'heading',
+          text: 'Promise.allSettled()'
+        },
+        {
+          type: 'paragraph',
+          text: 'Waits for all input Promises to settle and reports the result of each one.'
+        },
+        {
+          type: 'heading',
+          text: 'Promise.race()'
+        },
+        {
+          type: 'paragraph',
+          text: 'Settles when the first input Promise settles.'
+        },
+        {
+          type: 'heading',
+          text: 'Promise.any()'
+        },
+        {
+          type: 'paragraph',
+          text: 'Fulfills when the first input Promise fulfills. It rejects with AggregateError if all inputs reject.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const requests = [
+  fetch("/api/users"),
+  fetch("/api/products"),
+  fetch("/api/orders")
+];
+
+const results = await Promise.allSettled(
+  requests
+);
+
+console.log(results);`
+        },
+        {
+          type: 'table',
+          headers: ['Method', 'Behavior'],
+          rows: [
+            ['Promise.all()', 'All must fulfill'],
+            ['Promise.allSettled()', 'Wait for all to settle'],
+            ['Promise.race()', 'First settled Promise wins'],
+            ['Promise.any()', 'First fulfilled Promise wins']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'debounce-throttle',
+      title: '54. Debouncing & Throttling',
+      content: [
+        {
+          type: 'heading',
+          text: 'Debouncing'
+        },
+        {
+          type: 'paragraph',
+          text: 'Debouncing delays execution until a specified amount of time has passed without another call. It is useful for search inputs and form validation.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function debounce(fn, delay) {
+  let timer;
+
+  return (...args) => {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
+
+const search = debounce(value => {
+  console.log("Search:", value);
+}, 500);`
+        },
+        {
+          type: 'heading',
+          text: 'Throttling'
+        },
+        {
+          type: 'paragraph',
+          text: 'Throttling limits how frequently a function can execute during a period of repeated events.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function throttle(fn, delay) {
+  let waiting = false;
+
+  return (...args) => {
+    if (waiting) {
+      return;
+    }
+
+    fn(...args);
+
+    waiting = true;
+
+    setTimeout(() => {
+      waiting = false;
+    }, delay);
+  };
+}`
+        },
+        {
+          type: 'table',
+          headers: ['Debounce', 'Throttle'],
+          rows: [
+            ['Runs after activity stops', 'Runs at controlled intervals'],
+            ['Useful for search', 'Useful for scroll/resize events'],
+            ['Groups rapid calls', 'Limits rapid calls']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'browser-storage',
+      title: '55. Browser Storage',
+      content: [
+        {
+          type: 'heading',
+          text: 'localStorage'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `localStorage.setItem(
+  "username",
+  "Bibhu"
+);
+
+const username =
+  localStorage.getItem("username");
+
+console.log(username);
+
+localStorage.removeItem("username");`
+        },
+        {
+          type: 'heading',
+          text: 'sessionStorage'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `sessionStorage.setItem(
+  "theme",
+  "dark"
+);
+
+console.log(
+  sessionStorage.getItem("theme")
+);`
+        },
+        {
+          type: 'heading',
+          text: 'Storing Objects'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const user = {
+  name: "Bibhu",
+  age: 21
+};
+
+localStorage.setItem(
+  "user",
+  JSON.stringify(user)
+);
+
+const storedUser = JSON.parse(
+  localStorage.getItem("user")
+);
+
+console.log(storedUser);`
+        },
+        {
+          type: 'callout',
+          variant: 'danger',
+          title: 'Security',
+          text: 'Do not store highly sensitive secrets such as long-lived authentication credentials in browser storage without understanding the security risks. In web applications, HTTP-only cookies are often used for sensitive session tokens.'
+        }
+      ]
+    },
+
+    {
+      id: 'url-api',
+      title: '56. URL & URLSearchParams',
+      content: [
+        {
+          type: 'heading',
+          text: 'URL'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const url = new URL(
+  "https://example.com/products?page=2"
+);
+
+console.log(url.hostname);
+console.log(url.pathname);
+console.log(url.search);`
+        },
+        {
+          type: 'heading',
+          text: 'URLSearchParams'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const params = new URLSearchParams({
+  search: "laptop",
+  page: "2"
+});
+
+console.log(params.toString());
+
+console.log(
+  params.get("search")
+);`
+        }
+      ]
+    },
+
+    {
+      id: 'abort-controller',
+      title: '57. AbortController & Request Cancellation',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'AbortController can be used to cancel operations that support AbortSignal, including fetch requests.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const controller = new AbortController();
+
+fetch("/api/users", {
+  signal: controller.signal
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => {
+    if (error.name === "AbortError") {
+      console.log("Request cancelled");
+    }
+  });
+
+controller.abort();`
+        },
+        {
+          type: 'callout',
+          variant: 'success',
+          title: 'Practical Use',
+          text: 'AbortController is useful when cancelling outdated search requests, cleaning up requests when a component unmounts, or enforcing request cancellation.'
+        }
+      ]
+    },
+
+    {
+      id: 'strict-mode',
+      title: '58. Strict Mode',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Strict mode enables additional runtime checks and changes certain legacy JavaScript behaviors.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `"use strict";
+
+function test() {
+  x = 10;
+}
+
+test();`
+        },
+        {
+          type: 'paragraph',
+          text: 'In strict mode, assigning to an undeclared variable throws an error instead of silently creating a global variable.'
+        },
+        {
+          type: 'callout',
+          variant: 'info',
+          title: 'Modules',
+          text: 'JavaScript modules are automatically executed in strict mode.'
+        }
+      ]
+    },
+
+    {
+      id: 'modules-advanced',
+      title: '59. ES Modules vs CommonJS',
+      content: [
+        {
+          type: 'heading',
+          text: 'ES Modules'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `// math.js
+
+export const add = (a, b) => a + b;
+
+// app.js
+
+import { add } from "./math.js";
+
+console.log(add(10, 20));`
+        },
+        {
+          type: 'heading',
+          text: 'CommonJS'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `// math.js
+
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = {
+  add
+};
+
+// app.js
+
+const { add } = require("./math");
+
+console.log(add(10, 20));`
+        },
+        {
+          type: 'heading',
+          text: 'Dynamic import()'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `async function loadModule() {
+  const module = await import("./math.js");
+
+  console.log(module.add(10, 20));
+}
+
+loadModule();`
+        },
+        {
+          type: 'table',
+          headers: ['ES Modules', 'CommonJS'],
+          rows: [
+            ['import/export', 'require/module.exports'],
+            ['Standard JavaScript module system', 'Traditional Node.js module system'],
+            ['Supports static module syntax', 'Uses runtime require calls'],
+            ['Supports dynamic import()', 'CommonJS can also interoperate with modern Node.js module systems']
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'web-workers',
+      title: '60. Web Workers',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Web Workers allow JavaScript to execute certain tasks in a separate worker context so CPU-heavy work does not block the main page thread.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `// main.js
+
+const worker = new Worker(
+  "worker.js"
+);
+
+worker.postMessage(1000000);
+
+worker.onmessage = event => {
+  console.log(
+    "Result:",
+    event.data
+  );
+};`
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `// worker.js
+
+self.onmessage = event => {
+  const result = event.data * 2;
+
+  self.postMessage(result);
+};`
+        },
+        {
+          type: 'callout',
+          variant: 'info',
+          title: 'Use Case',
+          text: 'Web Workers are useful for suitable CPU-intensive calculations, data processing, and other work that should not block the main UI thread.'
+        }
+      ]
+    },
+
+    {
+      id: 'cors',
+      title: '61. CORS & Browser Security',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls whether a web page can access resources from a different origin.'
+        },
+        {
+          type: 'heading',
+          text: 'Origin'
+        },
+        {
+          type: 'paragraph',
+          text: 'An origin is defined by scheme, host, and port.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `// Example origins
+
+https://example.com
+https://api.example.com
+http://example.com:3000`
+        },
+        {
+          type: 'heading',
+          text: 'Fetch with Credentials'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `fetch("https://api.example.com/user", {
+  credentials: "include"
+})
+  .then(response => response.json())
+  .then(data => console.log(data));`
+        },
+        {
+          type: 'callout',
+          variant: 'warning',
+          title: 'Backend Configuration',
+          text: 'CORS permissions are normally controlled by the server. Client-side JavaScript cannot simply disable the browser same-origin security policy.'
+        }
+      ]
+    },
+
+    {
+      id: 'memory-management',
+      title: '62. Memory Management & Garbage Collection',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'JavaScript engines automatically manage memory. Objects that are no longer reachable from the program are candidates for garbage collection.'
+        },
+        {
+          type: 'heading',
+          text: 'Common Causes of Memory Leaks'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Unremoved event listeners',
+            'Uncleared timers',
+            'Unnecessary global references',
+            'Large objects retained by closures',
+            'Detached DOM elements that remain referenced',
+            'Unbounded caches'
+          ]
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const button =
+  document.querySelector("#button");
+
+function handleClick() {
+  console.log("Clicked");
+}
+
+button.addEventListener(
+  "click",
+  handleClick
+);
+
+// Later when no longer required:
+button.removeEventListener(
+  "click",
+  handleClick
+);`
+        }
+      ]
+    },
+
+    {
+      id: 'testing',
+      title: '63. JavaScript Testing',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'Testing verifies that JavaScript functions and applications behave as expected.'
+        },
+        {
+          type: 'heading',
+          text: 'Unit Test Example'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `function add(a, b) {
+  return a + b;
+}
+
+// Example assertion
+console.assert(
+  add(2, 3) === 5,
+  "add() should return 5"
+);`
+        },
+        {
+          type: 'heading',
+          text: 'Common Testing Types'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Unit testing',
+            'Integration testing',
+            'End-to-end testing',
+            'Regression testing',
+            'Performance testing'
+          ]
+        },
+        {
+          type: 'heading',
+          text: 'Popular JavaScript Testing Tools'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Jest',
+            'Vitest',
+            'Mocha',
+            'Playwright',
+            'Cypress'
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'security',
+      title: '64. JavaScript Security Best Practices',
+      content: [
+        {
+          type: 'heading',
+          text: 'Avoid Unsafe HTML Injection'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const message =
+  document.querySelector("#message");
+
+message.textContent =
+  userProvidedValue;`
+        },
+        {
+          type: 'heading',
+          text: 'Common Web Security Concerns'
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Cross-Site Scripting (XSS)',
+            'Unsafe HTML injection',
+            'Insecure dependency usage',
+            'Exposing API secrets in frontend code',
+            'Unsafe handling of untrusted input',
+            'Insecure authentication token storage',
+            'Prototype pollution risks in vulnerable code or dependencies'
+          ]
+        },
+        {
+          type: 'callout',
+          variant: 'danger',
+          title: 'Never Put Secrets in Frontend Code',
+          text: 'Anything shipped to the browser should be treated as accessible to the user. Private API keys and server secrets should remain on the server.'
+        }
+      ]
+    },
+
+    {
+      id: 'websockets',
+      title: '65. WebSocket & Real-Time JavaScript',
+      content: [
+        {
+          type: 'paragraph',
+          text: 'WebSocket provides a persistent two-way communication channel between a client and server, making it useful for real-time applications.'
+        },
+        {
+          type: 'code',
+          language: 'javascript',
+          code: `const socket = new WebSocket(
+  "wss://example.com/socket"
+);
+
+socket.addEventListener(
+  "open",
+  () => {
+    console.log("Connected");
+
+    socket.send(
+      JSON.stringify({
+        type: "message",
+        text: "Hello"
+      })
+    );
+  }
+);
+
+socket.addEventListener(
+  "message",
+  event => {
+    console.log(
+      "Received:",
+      event.data
+    );
+  }
+);
+
+socket.addEventListener(
+  "close",
+  () => {
+    console.log("Disconnected");
+  }
+);`
+        },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Chat applications',
+            'Live notifications',
+            'Real-time dashboards',
+            'Online games',
+            'Collaborative applications'
+          ]
+        }
+      ]
+    },
+
+    {
+      id: 'advanced-interview',
+      title: '66. Advanced JavaScript Interview Questions',
+      content: [
+        {
+          type: 'faq',
+          items: [
+            {
+              question: 'What is the event loop?',
+              answer:
+                'The event loop coordinates JavaScript execution with asynchronous host operations and queues, allowing callbacks and Promise reactions to execute when the call stack is available.'
+            },
+            {
+              question: 'What is the difference between microtasks and tasks?',
+              answer:
+                'Promise reactions and queueMicrotask callbacks are examples of microtasks. Timer callbacks and many browser event callbacks are tasks. Microtasks are generally processed before the next task is taken.'
+            },
+            {
+              question: 'What is the call stack?',
+              answer:
+                'The call stack tracks active JavaScript execution contexts and function calls.'
+            },
+            {
+              question: 'What is type coercion?',
+              answer:
+                'Type coercion is the conversion of a value from one type to another, either explicitly by the developer or implicitly by JavaScript.'
+            },
+            {
+              question: 'What are truthy and falsy values?',
+              answer:
+                'Truthy values behave as true in Boolean contexts, while falsy values behave as false. Important falsy values include false, 0, -0, 0n, empty string, null, undefined, and NaN.'
+            },
+            {
+              question: 'What is the prototype chain?',
+              answer:
+                'The prototype chain is the sequence of objects JavaScript searches when resolving properties that are not found directly on an object.'
+            },
+            {
+              question: 'What is the difference between shallow copy and deep copy?',
+              answer:
+                'A shallow copy duplicates the top-level structure while nested references may remain shared. A deep copy duplicates nested structures as well, subject to the cloning mechanism and supported data types.'
+            },
+            {
+              question: 'What is currying?',
+              answer:
+                'Currying transforms a function that accepts multiple arguments into a sequence of functions that each accept fewer arguments, commonly one argument at a time.'
+            },
+            {
+              question: 'What is memoization?',
+              answer:
+                'Memoization caches the results of expensive function calls so repeated calls with the same inputs can reuse previous results.'
+            },
+            {
+              question: 'What is debouncing?',
+              answer:
+                'Debouncing delays execution until a specified period has passed without another call.'
+            },
+            {
+              question: 'What is throttling?',
+              answer:
+                'Throttling limits how frequently a function can execute within a time period.'
+            },
+            {
+              question: 'What is a generator?',
+              answer:
+                'A generator is a special function declared with function* that can pause and resume execution using yield.'
+            },
+            {
+              question: 'What is an iterator?',
+              answer:
+                'An iterator is an object implementing the iterator protocol, providing a next() method that returns value and done information.'
+            },
+            {
+              question: 'What is a Symbol?',
+              answer:
+                'Symbol is a primitive type used to create unique values, commonly useful for unique object property keys.'
+            },
+            {
+              question: 'What is BigInt?',
+              answer:
+                'BigInt is a primitive type used for integers outside the safe integer range of Number.'
+            },
+            {
+              question: 'What is CORS?',
+              answer:
+                'CORS is a browser security mechanism that controls cross-origin access to resources through server-provided HTTP headers and browser enforcement.'
+            },
+            {
+              question: 'What is AbortController?',
+              answer:
+                'AbortController provides an AbortSignal that can be passed to supported asynchronous APIs such as fetch so the operation can be cancelled.'
+            },
+            {
+              question: 'What is garbage collection?',
+              answer:
+                'Garbage collection is automatic memory management in which JavaScript engines reclaim memory associated with objects that are no longer reachable.'
+            },
+            {
+              question: 'What is event delegation?',
+              answer:
+                'Event delegation uses event propagation to handle events from multiple child elements through a listener attached to a common ancestor.'
+            },
+            {
+              question: 'What is the difference between Map and Object?',
+              answer:
+                'Map is specifically designed for key-value collections and supports keys of various types, while Object is primarily a general-purpose object structure with property keys.'
+            },
+            {
+              question: 'What is the difference between Map and WeakMap?',
+              answer:
+                'Map holds strong references to its keys, while WeakMap weakly holds supported object or non-registered symbol keys, allowing them to remain eligible for garbage collection when otherwise unreachable.'
+            },
+            {
+              question: 'What is strict mode?',
+              answer:
+                'Strict mode enables stricter JavaScript semantics and additional runtime errors for certain problematic behaviors. ES modules automatically use strict mode.'
+            }
+          ]
+        }
+      ]
     }
   ]
 };
