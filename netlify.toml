@@ -6,6 +6,12 @@
   DISABLE_NETLIFY_TOOLBAR = "true"
 
 [[redirects]]
+  from = "/api/nvidia/*"
+  to = "https://integrate.api.nvidia.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

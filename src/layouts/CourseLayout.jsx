@@ -6,6 +6,7 @@ import Sidebar from '../components/layout/Sidebar';
 import ScrollToTop from '../components/common/ScrollToTop';
 import { getCourseById } from '../data';
 import NotFound from '../pages/NotFound/NotFound';
+import AIChatBot from '../components/chat/AIChatBot';
 
 export default function CourseLayout() {
   const { courseId, topicId } = useParams();
@@ -21,6 +22,7 @@ export default function CourseLayout() {
           <NotFound message={`We couldn't find a course called "${courseId}".`} />
         </main>
         <Footer />
+        <AIChatBot />
       </div>
     );
   }
@@ -41,6 +43,7 @@ export default function CourseLayout() {
         </div>
       </div>
       <Footer />
+      <AIChatBot />
     </div>
   );
 }

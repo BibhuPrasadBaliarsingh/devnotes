@@ -121,14 +121,17 @@ export default function NoteDetail() {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         {/* Left Sidebar - Topic Navigation (Desktop) */}
         <aside className="hidden lg:block lg:col-span-3">
-          <div className="sticky top-20 rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="mb-3 flex items-center justify-between pb-2 border-b border-border">
+          <div
+            className="sticky top-20 flex sidebar-scroll-height flex-col rounded-xl border border-border bg-card p-4 shadow-sm overflow-hidden"
+            style={{ maxHeight: 'calc(100vh - 6rem)' }}
+          >
+            <div className="mb-3 flex shrink-0 items-center justify-between pb-2 border-b border-border">
               <span className="text-xs font-bold uppercase tracking-wider text-muted">
                 Topics Registry
               </span>
               <BookOpen className="h-3.5 w-3.5 text-primary" />
             </div>
-            <nav className="space-y-1 text-xs">
+            <nav className="space-y-1 text-xs overflow-y-auto min-h-0 flex-1 pr-1 custom-scrollbar">
               {notes.map((item) => {
                 const ItemIcon = getCourseIcon(item.icon);
                 return (
@@ -255,7 +258,10 @@ export default function NoteDetail() {
 
         {/* Right Sidebar - "On this page" TOC (Desktop) */}
         <aside className="hidden lg:block lg:col-span-3">
-          <div className="sticky top-20 rounded-xl border border-border bg-card p-4 shadow-sm">
+          <div
+            className="sticky top-20 flex sidebar-scroll-height flex-col rounded-xl border border-border bg-card p-4 shadow-sm overflow-hidden"
+            style={{ maxHeight: 'calc(100vh - 6rem)' }}
+          >
             {contentData?.sections && (
               <TableOfContents sections={contentData.sections} />
             )}
