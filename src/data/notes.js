@@ -8,6 +8,8 @@ export const noteCategories = [
   'Database',
   'Software Engineering',
   'Interview Preparation',
+  'Digital Marketing',
+  'Backend Development',
 ];
 
 export const notes = [
@@ -179,6 +181,32 @@ export const notes = [
     featured: true,
     createdAt: '2026-01-20',
     contentModule: () => import('./notesContent/hr-interview-questions'),
+  },
+  {
+    id: 'meta-ads',
+    slug: 'meta-ads',
+    title: 'Meta Ads',
+    category: 'Digital Marketing',
+    description:
+      'Comprehensive Meta Ads guide covering Meta Business ecosystem, Facebook and Instagram advertising, campaign objectives, audience targeting, ad formats, CPC, CPM, CTR, CPA, ROAS, campaign setup, Business Portfolio, Facebook Pages, Instagram Professional Accounts, Ad Accounts, payment settings, optimization, and practical advertising strategies.',
+    tags: ['Meta Ads', 'Digital Marketing', 'Facebook Ads', 'Instagram Ads', 'Performance Marketing', 'ROAS', 'PPC', 'Campaigns'],
+    icon: 'Megaphone',
+    featured: true,
+    createdAt: '2026-02-01',
+    contentModule: () => import('./notesContent/meta-ads'),
+  },
+  {
+    id: 'backend',
+    slug: 'backend',
+    title: 'Backend Development',
+    category: 'Backend Development',
+    description:
+      'Comprehensive backend development guide covering backend fundamentals, HTTP, REST APIs, databases, SQL and NoSQL, authentication, authorization, sessions, JWT, caching, message queues, asynchronous processing, API security, scalability, load balancing, microservices, Docker, monitoring, system design, and real-world backend architecture.',
+    tags: ['Backend', 'System Design', 'APIs', 'REST', 'Databases', 'Microservices', 'Docker', 'Scalability'],
+    icon: 'Server',
+    featured: true,
+    createdAt: '2026-02-05',
+    contentModule: () => import('./notesContent/backend'),
   },
 ];
 

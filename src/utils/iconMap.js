@@ -13,6 +13,7 @@ import {
   Briefcase,
   FileCode,
   Globe,
+  Megaphone,
 } from 'lucide-react';
 
 const ICONS = {
@@ -30,6 +31,7 @@ const ICONS = {
   Briefcase,
   FileCode,
   Globe,
+  Megaphone,
 };
 
 export function getCourseIcon(name) {

@@ -11,6 +11,8 @@ import mongodbContent from './mongodb';
 import sdlcContent from './sdlc';
 import softwareTestingContent from './software-testing';
 import hrInterviewContent from './hr-interview-questions';
+import metaAdsContent from './meta-ads';
+import backendContent from './backend';
 
 const contentMap = {
   html: htmlContent,
@@ -26,6 +28,8 @@ const contentMap = {
   sdlc: sdlcContent,
   'software-testing': softwareTestingContent,
   'hr-interview-questions': hrInterviewContent,
+  'meta-ads': metaAdsContent,
+  backend: backendContent,
 };
 
 export function getNoteContentBySlug(slug) {
